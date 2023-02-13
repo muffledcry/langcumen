@@ -12,13 +12,6 @@ enum Number {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq)]
-enum Inflection {
-    Positive,
-    Comparative,
-    Superlative,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq)]
 enum Degree {
     Positive,
     Comparative,
@@ -102,7 +95,6 @@ impl Verb {
 
 pub struct Adjective {
     base_form: String,
-    inflection: Inflection,
     gender: Gender,
     number: Number,
     degree: Degree,
@@ -111,42 +103,26 @@ pub struct Adjective {
 impl Adjective {
     fn new(
         base_form: &str,
-        inflection: Inflection,
         gender: Gender,
         number: Number,
         degree: Degree,
     ) -> Adjective {
         Adjective {
             base_form: base_form.to_string(),
-            inflection,
             gender,
             number,
             degree,
         }
     }
 
-    fn inflect(&self, inflection: Inflection) -> Adjective {
-        Adjective {
-            base_form: self.base_form.clone(),
-            inflection,
-            gender: self.gender,
-            number: self.number,
-            degree: self.degree,
-        }
-    }
 
     fn adjust_degree(&self, degree: Degree) -> Adjective {
         Adjective {
             base_form: self.base_form.clone(),
-            inflection: self.inflection,
             number: self.number,
             gender: self.gender,
             degree,
         }
-    }
-
-    fn get_inflection(&self) -> Inflection {
-        self.inflection
     }
 
     fn get_gender(&self) -> Gender {
