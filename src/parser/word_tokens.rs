@@ -1,7 +1,5 @@
 use super::word_enums::{Gender, Number, Modifies, Degree};
 
-
-
 pub struct Word;
 
 pub struct Noun {
