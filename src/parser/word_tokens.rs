@@ -1,22 +1,6 @@
-#[derive(Debug, Clone, Copy, PartialEq)]
-enum Gender {
-    Masculine,
-    Feminine,
-    Neutral,
-}
+use super::word_enums::{Gender, Number, Modifies, Degree};
 
-#[derive(Debug, Clone, Copy, PartialEq)]
-enum Number {
-    Singular,
-    Plural,
-}
 
-#[derive(Debug, Clone, Copy, PartialEq)]
-enum Degree {
-    Positive,
-    Comparative,
-    Superlative,
-}
 
 pub struct Word;
 
@@ -115,7 +99,6 @@ impl Adjective {
         }
     }
 
-
     fn adjust_degree(&self, degree: Degree) -> Adjective {
         Adjective {
             base_form: self.base_form.clone(),
@@ -138,7 +121,23 @@ impl Adjective {
     }
 }
 
-pub struct Adverb;
+pub struct Adverb {
+    base_form: String,
+    modifies: Modifies,
+}
+
+impl Adverb {
+    fn new(base_form: &str, modifies: Modifies) -> Adverb {
+        Adverb {
+            base_form: base_form.to_string(),
+            modifies,
+        }
+    }
+
+    fn get_modification(&self) -> Modifies {
+        self.modifies
+    }
+}
 pub struct Preposition;
 pub struct Conjunction;
 pub struct Interjection;
