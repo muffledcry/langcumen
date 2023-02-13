@@ -12,9 +12,6 @@ pub struct Preprocessor {
     all_tokens: VecDeque<String>,
     unique_words: VecDeque<String>, 
     sentence_tokens: VecDeque<String>,
-    all_token_count: i32,
-    unique_word_count: i32,
-    sentence_count: i32,
 }
 
 impl Preprocessor {
@@ -23,18 +20,12 @@ impl Preprocessor {
         let all_tokens = Preprocessor::get_all_tokens(&original_text);
         let unique_words = Preprocessor::get_unique_words(&all_tokens);
         let sentence_tokens = Preprocessor::get_sentence_tokens(&original_text);
-        let all_token_count: i32 = *&all_tokens.len() as i32;
-        let unique_word_count: i32 = *&unique_words.len() as i32;
-        let sentence_count: i32 = *&sentence_tokens.len() as i32;
 
         Preprocessor {
             original_text,
             all_tokens,
             unique_words,
             sentence_tokens,
-            all_token_count,
-            unique_word_count,
-            sentence_count,
         }
     }
     
