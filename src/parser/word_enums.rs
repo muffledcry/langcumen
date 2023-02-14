@@ -24,3 +24,16 @@ pub enum Modifies {
     Adjective,
     Adverb,
 }
+
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum Position {
+    Before,
+    After
+}
+
+pub enum PrepositionCase {
+    Nominative,
+    Accusative,
+    Dative,
+    Genitive,
+}

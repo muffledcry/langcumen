@@ -1,4 +1,4 @@
-use super::word_enums::{Gender, Number, Modifies, Degree};
+use super::word_enums::{Gender, Number, Modifies, Degree, Position, PrepositionCase};
 
 pub struct Word;
 
@@ -80,6 +80,7 @@ pub struct Adjective {
     gender: Gender,
     number: Number,
     degree: Degree,
+    position: Position,
 }
 
 impl Adjective {
@@ -88,12 +89,14 @@ impl Adjective {
         gender: Gender,
         number: Number,
         degree: Degree,
+        position: Position,
     ) -> Adjective {
         Adjective {
             base_form: base_form.to_string(),
             gender,
             number,
             degree,
+            position,
         }
     }
 
@@ -103,6 +106,7 @@ impl Adjective {
             number: self.number,
             gender: self.gender,
             degree,
+            position: self.position,
         }
     }
 
@@ -117,26 +121,39 @@ impl Adjective {
     fn get_degree(&self) -> Degree {
         self.degree
     }
+
+    fn get_position(&self) -> Position {
+        self.position
+    }
 }
 
 pub struct Adverb {
     base_form: String,
     modifies: Modifies,
+    position: Position,
 }
 
 impl Adverb {
-    fn new(base_form: &str, modifies: Modifies) -> Adverb {
+    fn new(base_form: &str, modifies: Modifies, position: Position) -> Adverb {
         Adverb {
             base_form: base_form.to_string(),
             modifies,
+            position,
         }
     }
 
     fn get_modification(&self) -> Modifies {
         self.modifies
     }
+
+    fn get_position(&self) -> Position {
+        self.position
+    }
 }
-pub struct Preposition;
+pub struct Preposition {
+    base_form: String,
+    case: PrepositionCase,
+}
 pub struct Conjunction;
 pub struct Interjection;
 pub struct Article;
