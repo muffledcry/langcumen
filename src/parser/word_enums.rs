@@ -37,3 +37,18 @@ pub enum PrepositionCase {
     Dative,
     Genitive,
 }
+
+pub enum ConjunctionType {
+    Coordinating,
+    Subordinating,
+    Correlative,
+}
+pub enum ConjunctionCategory {
+    ComparisonAgreement,
+    ContrastDisagreement,
+    Addition,
+    Substitution,
+    Temporal,
+    Causal,
+    Conditional,
+}
