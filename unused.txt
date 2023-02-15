@@ -1,0 +1,9 @@
+fn _remove_newlines(tokens: VecDeque<String>) -> VecDeque<String> {
+    let mut processed_tokens = VecDeque::new();
+
+    for token in tokens {
+        let processed_token = token.trim().replace("\r", "").replace("\n", "").to_string();
+        processed_tokens.push_back(processed_token);
+    }
+    processed_tokens
+}
