@@ -1,6 +1,6 @@
 use super::word_enums::{
     ConjunctionCategory, ConjunctionType, Degree, Gender, Modifies, Number, Position,
-    PrepositionCase,
+    PrepositionCase, Sentiment
 };
 
 pub struct Word;
@@ -158,6 +158,18 @@ pub struct Preposition {
     case: PrepositionCase,
 }
 
+impl Preposition {
+  fn new(base_form: &str, case: PrepositionCase) -> Preposition {
+    Preposition {
+      base_form: base_form.to_string(),
+      case,
+    }
+  }  
+  fn get_case(&self) -> PrepositionCase {
+    self.case
+  }
+}
+
 pub struct Conjunction {
     base_form: String,
     conjunction_type: ConjunctionType,
@@ -174,5 +186,18 @@ impl Conjunction {
     }
 }
 
-pub struct Interjection;
+pub struct Interjection {
+  word: String,
+  sentiment: Sentiment,
+}
+
+impl Interjection {
+  fn new(word: &str, sentiment: Sentiment) -> Interjection {
+    Interjection {
+    word: word.to_string(),
+    sentiment,
+    }
+  }
+}
+
 pub struct Article;

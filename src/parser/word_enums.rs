@@ -52,3 +52,11 @@ pub enum ConjunctionCategory {
     Causal,
     Conditional,
 }
+
+pub enum Sentiment {
+  Excitement,
+  Pain,
+  Surprise,
+  Disapproval,
+  Approval,
+}
