@@ -31,6 +31,7 @@ pub enum Position {
     After
 }
 
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum PrepositionCase {
     Nominative,
     Accusative,
@@ -59,4 +60,5 @@ pub enum Sentiment {
   Surprise,
   Disapproval,
   Approval,
+  Neutral,
 }
