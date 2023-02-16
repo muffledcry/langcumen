@@ -3,10 +3,15 @@ pub enum PartOfSpeech {
     Pronoun(Word),
     Verb(Word),
     Adjective(Word),
-    // other variants
+    Adverb(Word),
+    Preposition(Word),
+    Conjunction(Word),
+    Interjection(Word),
+    Article(Word),
 }
 
 pub struct Word;
+
 
 pub trait Noun {
     fn new(singular: &str) -> Self;
@@ -27,8 +32,6 @@ impl Noun for Word {
         self.to_string()
     }
 }
-
-
 
 impl Noun for PartOfSpeech {
     fn new(singular: &str) -> PartOfSpeech {
@@ -91,7 +94,6 @@ impl Pronoun for Word {
     }
 }
 
-
 impl Pronoun for PartOfSpeech {
     fn new(subject_form: &str, object_form: &str, possessive_form: &str, reflexive_form: &str, gender: Gender, number: Number) -> PartOfSpeech {
         PartOfSpeech::Pronoun(Word::new(subject_form, object_form, possessive_form, reflexive_form, gender, number))
@@ -140,7 +142,6 @@ impl Pronoun for PartOfSpeech {
     }
 }
 
-pub struct Word;
 
 pub trait Verb {
     fn new(base_form: &str) -> Self;
@@ -211,7 +212,6 @@ impl Verb for Word {
         format!("to {}", self)
     }
 }
-
 
 impl Verb for PartOfSpeech {
     fn new(base_form: &str) -> PartOfSpeech {
@@ -289,7 +289,6 @@ impl Verb for PartOfSpeech {
     }
 }
 
-pub struct Word;
 
 pub trait Adjective {
     fn new(base_form: &str, gender: Gender, number: Number, degree: Degree, position: Position) -> Self;
@@ -330,7 +329,6 @@ impl Adjective for Word {
         Position::Attributive
     }
 }
-
 
 impl Adjective for PartOfSpeech {
     fn new(base_form: &str, gender: Gender, number: Number, degree: Degree, position: Position) -> PartOfSpeech {
@@ -375,6 +373,247 @@ impl Adjective for PartOfSpeech {
     fn position(&self) -> Position {
         match self {
             PartOfSpeech::Adjective(word) => word.position(),
+            // other cases
+        }
+    }
+}
+
+
+pub trait Adverb {
+    fn new(base_form: &str, modifies: Modifies, position: Position) -> Self;
+    fn base_form(&self) -> String;
+    fn modifies(&self) -> Modifies;
+    fn position(&self) -> Position;
+}
+
+impl Adverb for Word {
+    fn new(base_form: &str, modifies: Modifies, position: Position) -> Word {
+        Word
+    }
+
+    fn base_form(&self) -> String {
+        self.to_string()
+    }
+
+    fn modifies(&self) -> Modifies {
+        Modifies::Verb
+    }
+
+    fn position(&self) -> Position {
+        Position::After
+    }
+}
+
+impl Adverb for PartOfSpeech {
+    fn new(base_form: &str, modifies: Modifies, position: Position) -> PartOfSpeech {
+        PartOfSpeech::Adverb(Word::new(base_form, modifies, position))
+    }
+
+    fn base_form(&self) -> String {
+        match self {
+            PartOfSpeech::Adverb(word) => word.base_form(),
+            // other cases
+        }
+    }
+
+    fn modifies(&self) -> Modifies {
+        match self {
+            PartOfSpeech::Adverb(word) => word.modifies(),
+            // other cases
+        }
+    }
+
+    fn position(&self) -> Position {
+        match self {
+            PartOfSpeech::Adverb(word) => word.position(),
+            // other cases
+        }
+    }
+}
+
+
+pub trait Preposition {
+    fn new(base_form: &str, case: PrepositionCase) -> Self;
+    fn base_form(&self) -> String;
+    fn case(&self) -> PrepositionCase;
+}
+
+impl Preposition for Word {
+    fn new(base_form: &str, case: PrepositionCase) -> Word {
+        Word
+    }
+
+    fn base_form(&self) -> String {
+        self.to_string()
+    }
+
+    fn case(&self) -> PrepositionCase {
+        PrepositionCase::Accusative
+    }
+}
+
+impl Preposition for PartOfSpeech {
+    fn new(base_form: &str, case: PrepositionCase) -> PartOfSpeech {
+        PartOfSpeech::Preposition(Word::new(base_form, case))
+    }
+
+    fn base_form(&self) -> String {
+        match self {
+            PartOfSpeech::Preposition(word) => word.base_form(),
+            // other cases
+        }
+    }
+
+    fn case(&self) -> PrepositionCase {
+        match self {
+            PartOfSpeech::Preposition(word) => word.case(),
+            // other cases
+        }
+    }
+}
+
+
+pub trait Conjunction {
+    fn new(base_form: &str, conjunction_type: ConjunctionType, category: ConjunctionCategory) -> Self;
+    fn base_form(&self) -> String;
+    fn conjunction_type(&self) -> ConjunctionType;
+    fn category(&self) -> ConjunctionCategory;
+}
+
+impl Conjunction for Word {
+    fn new(base_form: &str, conjunction_type: ConjunctionType, category: ConjunctionCategory) -> Word {
+        Word
+    }
+
+    fn base_form(&self) -> String {
+        self.to_string()
+    }
+
+    fn conjunction_type(&self) -> ConjunctionType {
+        ConjunctionType::Coordinating
+    }
+
+    fn category(&self) -> ConjunctionCategory {
+        ConjunctionCategory::Additive
+    }
+}
+
+impl Conjunction for PartOfSpeech {
+    fn new(base_form: &str, conjunction_type: ConjunctionType, category: ConjunctionCategory) -> PartOfSpeech {
+        PartOfSpeech::Conjunction(Word::new(base_form, conjunction_type, category))
+    }
+
+    fn base_form(&self) -> String {
+        match self {
+            PartOfSpeech::Conjunction(word) => word.base_form(),
+            // other cases
+        }
+    }
+
+    fn conjunction_type(&self) -> ConjunctionType {
+        match self {
+            PartOfSpeech::Conjunction(word) => word.conjunction_type(),
+            // other cases
+        }
+    }
+
+    fn category(&self) -> ConjunctionCategory {
+        match self {
+            PartOfSpeech::Conjunction(word) => word.category(),
+            // other cases
+        }
+    }
+}
+
+
+pub trait Interjection {
+    fn new(word: &str, sentiment: Sentiment) -> Self;
+    fn word(&self) -> String;
+    fn sentiment(&self) -> Sentiment;
+}
+
+impl Interjection for Word {
+    fn new(word: &str, sentiment: Sentiment) -> Word {
+        Word
+    }
+
+    fn word(&self) -> String {
+        self.to_string()
+    }
+
+    fn sentiment(&self) -> Sentiment {
+        Sentiment::Neutral
+    }
+}
+
+impl Interjection for PartOfSpeech {
+    fn new(word: &str, sentiment: Sentiment) -> PartOfSpeech {
+        PartOfSpeech::Interjection(Word::new(word, sentiment))
+    }
+
+    fn word(&self) -> String {
+        match self {
+            PartOfSpeech::Interjection(word) => word.word(),
+            // other cases
+        }
+    }
+
+    fn sentiment(&self) -> Sentiment {
+        match self {
+            PartOfSpeech::Interjection(word) => word.sentiment(),
+            // other cases
+        }
+    }
+}
+
+
+pub trait Article {
+    fn new(form: &str, gender: Gender, number: Number) -> Self;
+    fn form(&self) -> String;
+    fn gender(&self) -> Gender;
+    fn number(&self) -> Number;
+}
+
+impl Article for Word {
+    fn new(form: &str, gender: Gender, number: Number) -> Word {
+        Word
+    }
+
+    fn form(&self) -> String {
+        self.to_string()
+    }
+
+    fn gender(&self) -> Gender {
+        Gender::Masculine
+    }
+
+    fn number(&self) -> Number {
+        Number::Singular
+    }
+}
+
+impl Article for PartOfSpeech {
+    fn new(form: &str, gender: Gender, number: Number) -> PartOfSpeech {
+        PartOfSpeech::Article(Word::new(form, gender, number))
+    }
+
+    fn form(&self) -> String {
+        match self {
+            PartOfSpeech::Article(word) => word.form(),
+            // other cases
+        }
+    }
+
+    fn gender(&self) -> Gender {
+        match self {
+            PartOfSpeech::Article(word) => word.gender(),
+            // other cases
+        }
+    }
+
+    fn number(&self) -> Number {
+        match self {
+            PartOfSpeech::Article(word) => word.number(),
             // other cases
         }
     }

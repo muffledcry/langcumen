@@ -153,6 +153,7 @@ impl Adverb {
         self.position
     }
 }
+
 pub struct Preposition {
     base_form: String,
     case: PrepositionCase,
@@ -200,4 +201,19 @@ impl Interjection {
   }
 }
 
-pub struct Article;
+pub struct Article {
+    form: String,
+    gender: Gender,
+    number: Number,
+}
+
+impl Article {
+    fn new(form: &str, gender: Gender, number: Number) -> Article {
+        Article {
+            form: form.to_string(),
+            gender,
+            number,
+        }
+    }
+}
+
